@@ -1,0 +1,27 @@
+<!--<ul>
+  <li *ngFor="let reportType of reportsType;let i=index">
+    <a [routerLink]="['/manager','reports','report-edit',i]">{{reportType}}</a><br>
+  </li>
+</ul>-->
+
+<div class="col-xs-5">
+<nav >
+  <div class="nav nav-tabs" id="nav-tab" role="tablist" >
+    <a class="nav-item nav-link active"  id="nav-home-tab" data-toggle="tab" href="#nav-home"  aria-selected="true" >Time Balance & Overtime</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"  aria-selected="false">Leave Time & Balances</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <br>
+    Review your users' current time balances and get a clear picture of their overtime information.<br><hr>
+    <button class="btn btn-primary" data-dismiss="modal"  [routerLink]="['/manager','reports','report-edit',0]">Configure Time Balance</button><br>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <br>
+    Review how many hours have been spent on different leaves and get totals on the leaves planned for the future.<br><hr>
+    <button class="btn btn-primary"  data-dismiss="modal" [routerLink]="['/manager','reports','report-edit',1]">Configure Leave Time </button><br>
+    <br>
+  </div>
+</div>
+</div>

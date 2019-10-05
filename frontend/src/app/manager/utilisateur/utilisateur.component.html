@@ -1,0 +1,186 @@
+<section class="container-fluid">
+  <div class="container">
+    <div class="container">
+      <!-- ajouter un utilisateur -->
+      <!-- Button trigger modal -->
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="isdisplay">
+        Cette adresse email est associé à un autre utilisateur.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ajouter un utilisateur</button>
+      <!-- Modal -->
+      <form [formGroup]="registrationForm" (ngSubmit)="registrationForm.valid && submitRegistration(registrationForm.value)" novalidate>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajout d'un utilisateur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+              </div>
+              <div class="modal-body">
+                <!-- formulaire -->
+
+                <div class="form-group row">
+                  <label  class="col-2 col-form-label">Nom</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder="Nom" id="nom" #nom formControlName="nom">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-2 col-form-label">Prenom</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder="Prénom" id="prenom" #prenom formControlName="prenom">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-2 col-form-label">Email</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder="Email" id="email" #email formControlName="email">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-2 col-form-label">Poste</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" placeholder="Poste" id="poste" #poste formControlName="poste">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label  class="col-2 col-form-label">Type</label>
+                  <div class="col-10">
+                    <select class="form-control" name="type" #type>
+                  <option value="equip" selected>Equipier</option>
+                  <option value="admin">Administrateur</option>
+                </select>
+                  </div>
+                </div>
+
+                <!-- formulaire -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Annuler</button>
+                <button [disabled]='!registrationForm.valid' type="button" class="btn btn-success" data-dismiss="modal" (click)="onAddUser(nom, prenom, email, type, poste)">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- ajouter un utilisateur -->
+    </div>
+    <div class="container-fluid">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Type</th>
+            <th scope="col">Poste</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of tabUser">
+            <td> {{ user.nom }} </td>
+            <td> {{ user.prenom }} </td>
+            <td> {{ user.email }} </td>
+            <td> {{ user.type }} </td>
+            <td> {{ user.poste }} </td>
+            <td> <img class="{{user._id}}" (click)="onPreModif($event, nomm, prenomm, emailm, typem, postem)" data-toggle="modal" data-target="#modif_user" style="cursor:pointer;" class="mb-4" src="http://www.webdesign-tutoriaux.com/images/resultat-bouton-glassy-gimp.png"
+                alt="Modifier" width="40" height="40"> </td>
+            <td> <img class="{{user._id}}" (click)="onPreSuppr($event,user._id)" data-toggle="modal" data-target="#suppr_user" style="cursor:pointer;" class="mb-4" src="https://png.icons8.com/small/1600/filled-trash.png" alt="Supprimer" width="40"
+                height="40"> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <!-- modification de l'utilisateur -->
+  <!-- Modal -->
+  <div class="modal fade" id="modif_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Modifier l'utilisateur</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+        </div>
+        <div class="modal-body">
+          <!-- formulaire -->
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Nom</label>
+            <div class="col-10">
+              <input required class="form-control" type="text" placeholder="Nom" id="nomm" #nomm>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label  class="col-2 col-form-label">Prenom</label>
+            <div class="col-10">
+              <input required class="form-control" type="text" placeholder="Prénom" id="prenomm" #prenomm>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Email</label>
+            <div class="col-10">
+              <input required class="form-control" type="text" placeholder="Email" id="emailm" #emailm disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label  class="col-2 col-form-label">Poste</label>
+            <div class="col-10">
+              <input required class="form-control" type="text" placeholder="Poste" id="postem" #postem>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Type</label>
+            <div class="col-10">
+              <select class="form-control" name="" #typem>
+                <option value="equip" selected>Equipier</option>
+                <option value="admin">Administrateur</option>
+            </select>
+            </div>
+          </div>
+
+          <!-- formulaire -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onModif(nomm, prenomm, emailm, typem, postem)">Modifier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- suppression de l'utlisateur -->
+  <!-- Modal -->
+  <div class="modal fade" id="suppr_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Supprimer l'utilisateur</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+        </div>
+        <div class="modal-body">
+          <!-- formulaire -->
+          Etes-vous sure de vouloir supprimer <code class='highlighter-rouge'>{{isSelected}}</code> de la liste ?<br/>La suppression est irriversible.
+          <!-- formulaire -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"
+                  (click)="onSuppr(idUserSuppr)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

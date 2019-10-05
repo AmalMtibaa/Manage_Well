@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col">
+<h2> Create {{reportType}} Report</h2>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+      <label class="label label-default">Name</label>
+        <input type="text" name="name"
+               placeholder="Report name"
+               formControlName="name"
+               class="form-control"
+               required>
+
+      <div class="form-row form-group">
+        <div class="col-md-12 mb-3">
+        <label  class="label label-default" for="dataRange" >Date Range</label>
+
+        <select class="form-control AlignInputs"
+                formControlName="dataRange"
+                (change)="onSelectDateRange(sel);calledByCalender=true;" #sel>
+                <option *ngFor="let data of dataRange"
+                        [ngValue]="data"
+                        id="dataRange">
+                  {{data}}
+                </option>
+        </select>
+        </div>
+        <div class="col">
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp"  formControlName="date1" readonly (ngModelChange)="onChangeCalender()" >
+          <mat-datepicker-toggle matSuffix [for]="dp" ></mat-datepicker-toggle>
+          <mat-datepicker #dp  ></mat-datepicker>
+        </mat-form-field>
+
+        </div>
+          <div class="col">
+        <mat-form-field  >
+          <input matInput [matDatepicker]="dp1" formControlName="date2" readonly  (ngModelChange)="onChangeCalender()">
+          <mat-datepicker-toggle matSuffix [for]="dp1" ></mat-datepicker-toggle>
+          <mat-datepicker #dp1 ></mat-datepicker>
+        </mat-form-field>
+          </div>
+      </div>
+
+      <label class="label label-default" >Data Grouping</label>
+        <div class="form-control">
+
+          <select class="form-control" formControlName="dataGrouping1" (change)="onSelectedDataGr1(dg1)" #dg1>
+          <option *ngFor="let data of dataGrouping" [ngValue]="data">{{data}}</option>
+          </select>
+
+          <br>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col">
+              <select class="form-control"
+                      formControlName="dataGrouping2"
+                      (change)="onSelectedDataGr2(dg2,dg1)"
+                      #dg2>
+                <option *ngFor="let data of dataGrouping2" [ngValue]="data" >
+                  {{data}}</option>
+              </select>
+
+              <div *ngIf="form.get('dataGrouping2').invalid" >
+                <br>
+                <div class="alert alert-danger errorControl">
+                  <p class="ecriture" >You can't use the same grouping option</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="reportType=='Leave Time & Balances'">
+          <label class="label label-default"  >Leave Types</label>
+          <select class="form-control"  formControlName="leaveType" #lt>
+            <option>All leaves Time</option>
+            <option>Selected leave Times</option>
+          </select>
+
+          <div *ngIf="lt.value=='Selected leave Times'">
+            Please selected Staff here:
+            <div *ngFor="let type of leaveType ">
+              <input type="checkbox"
+                     value="{{type}}"
+                     (click)="onCheckboxLeaveType(type,$event)"
+              > {{type}}
+            </div>
+          </div>
+
+
+         <!-- Report Columns will be treated later--------Don't Remove It !!!! ----------------
+
+          <label class="label label-default"  >Report Columns</label>
+          <select class="form-control" formControlName="reportLeaveTimeBalance">
+            <option
+              *ngFor="let data of reportLeaveTimeBalance" [ngValue]="data">{{data}}
+            </option>
+          </select>-->
+        </div>
+
+      <!--<div *ngIf="reportType=='Time Balance & Overtime'">
+        <label class="label label-default"  >Report Columns</label>
+        <select class="form-control"  formControlName="reportTimeBalanceColumns">
+          <option
+            *ngFor="let data of reportTimeBalanceColumns" [ngValue]="data">{{data}}
+          </option>
+        </select>
+      </div>-->
+
+        <label class="label label-default" >Selected staff</label>
+        <select class="form-control" formControlName="selectedStaff" #staff>
+          <option>All Staff</option>
+          <option >Selected Staff</option>
+        </select>
+
+
+      <div *ngIf="staff.value=='Selected Staff'">
+        Please selected Staff here:
+      <div *ngFor="let user of userTab">
+        <input type="checkbox"
+               value="{{user.nom}}"
+               (change)="onCheckboxChange(user,$event)"
+               > {{user.nom}} {{user.prenom}}
+      </div>
+      </div>
+      <br>
+
+      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Generate</button>
+
+
+
+    </form>
+</div>
+  <div class="col-md-2"></div>
+<div class="col">
+  <div class="row">
+      <app-report-form></app-report-form>
+  </div>
+</div>
+</div>

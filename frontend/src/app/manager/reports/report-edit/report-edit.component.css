@@ -1,0 +1,21 @@
+select{
+  cursor: pointer;
+}
+.row{
+  color: #3a87ad;
+}
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+.errorControl{
+  height: 30px;
+  font-size: small;
+  align-content: center;
+
+}
+.ecriture{
+  position:absolute;
+  top: -0.5px;
+}
+

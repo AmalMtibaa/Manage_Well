@@ -1,0 +1,51 @@
+
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+
+    <h5 class="modal-title" >update {{selectedTask.name}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true" (click)="onClose()">&times;</span>
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <label  class="col-2 col-form-label">Name</label>
+    <div class="col-10">
+      <input class="form-control" type="text"  [ngModel]="selectedTask.name" name="name">
+    </div>
+
+    <label class="col-2 col-form-label" >status</label>
+    <div class="col-10">
+      <select class="form-control"  [ngModel]="selectedTask.status==true ? 'Open':'Close'" name="status" >
+        <option >Open</option>
+        <option >Close</option>
+      </select>
+
+    </div>
+
+
+    <label  class="col-2 col-form-label">Duration</label>
+    <div class="col-10">
+      <input class="form-control"
+             type="number" placeholder="Durée de la tache (en jour)"
+             [ngModel]="selectedTask.duration" name="duration">
+    </div>
+
+    <label  class="col-2 col-form-label">Deadline</label>
+    <div class="col-10">
+      <input class="form-control"
+             type="date"   [ngModel]="selectedTask.deadline|date:'yyyy-MM-dd'" name="deadline"
+
+      >
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSubmit()">Update Task</button>
+  </div>
+
+
+</form>

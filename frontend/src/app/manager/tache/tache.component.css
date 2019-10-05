@@ -1,0 +1,19 @@
+a{
+  cursor: pointer;
+}
+a.list-group-item {
+
+  background:url(img/client.png) no-repeat left;
+  margin: 0px;
+}
+ul {
+  background:url(img/icon.png) no-repeat left;
+
+  margin: 5px;
+}
+li{
+  list-style-type: none;
+}
+i.glyphicon{
+  margin:15px;
+}

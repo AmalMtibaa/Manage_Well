@@ -1,0 +1,26 @@
+
+<table class="table table-bordered" >
+
+  <tr class="table-primary">
+    <td  >{{db1}}</td>
+    <td >Total Leave Type</td>
+    <td>Leave Type</td>
+    <td>Leave Type</td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Total:</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+
+  </tr>
+
+  <tr *ngFor="let i of Arr(num).fill(1)" style="background-color: #f2f2f2">
+    <td>{{db1 |LastCharacterCut }}</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+  </tr>
+
+</table>
+

@@ -1,0 +1,51 @@
+.accueil {
+  /* background: url("http://www.technocrazed.com/wp-content/uploads/2015/12/New-York-Wallpaper-Background-5.jpg") no-repeat center center fixed; */
+  /* opacity: 0.8;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  max-width: 100%;
+  max-height: 100%;
+  height: inherit !important; */
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+
+  /* Preserve aspet ratio */
+  /* min-width: 100%;
+  min-height: 100%; */
+}
+
+/* img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.8;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  z-index: -2;
+} */
+
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -2;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+}

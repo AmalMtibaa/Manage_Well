@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <form>
+        <div class="form-row">
+          <div class="col">
+            <div class="row display-5">
+              Nom de la tache
+            </div>
+          </div>
+          <div class="col">
+            <div class="row display-5">
+              Nombre d'heures
+            </div>
+          </div>
+        </div>
+      </form>
+      <form>
+        <div class="form-row" *ngFor="let task of tasks">
+          <div class="col">
+            <input type="text" class="form-control task" value="{{task.name}}" readonly>
+            <input type="text" class="form-control id" value="{{task._id}}" readonly hidden>
+          </div>
+          <div class="col">
+            <input type="number" class="form-control dura" placeholder="durée en heures">
+          </div>
+          <br>
+        </div>
+      </form>
+      <div class="row display-4">
+        <button type="button" name="button" class="btn btn-primary" (click)="onSaveWork($event)">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>

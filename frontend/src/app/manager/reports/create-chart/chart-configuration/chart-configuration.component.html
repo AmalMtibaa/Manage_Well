@@ -1,0 +1,83 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+<div class="row ">
+
+  <div class="col-md-3">
+    <label>Date Range</label>
+  <select class="form-control"
+          formControlName="dataRange"
+          (change)="onSelectDateRange(dR)" #dR>
+    <option *ngFor="let data of dataRange"
+            [ngValue]="data"
+            id="dataRange">
+      {{data}}
+    </option>
+  </select>
+  </div>
+
+  <div class="col-md-3">
+    <label>Show</label>
+    <select class="form-control" formControlName="totalWorkingHours"  >
+      <option>Total working hours</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+  <label>By</label>
+  <select class="form-control" formControlName="by" (change)="OnBySelected(sel)" #sel>
+    <option>Users</option>
+    <option>Projects</option>
+  </select>
+  </div>
+  <div class="col-md-3">
+
+    <label class="label label-default" >Selected staff</label>
+    <select class="form-control" formControlName="selectedStaff" #staff (change)="onSelectTypeStaff(sele)" #sele>
+      <option>All Staff</option>
+      <option >Selected Staff</option>
+    </select>
+
+
+    <div *ngIf="staff.value=='Selected Staff'">
+      Please selected Staff here:
+      <div *ngFor="let user of userTab;let i=index">
+        <input type="checkbox"
+               value="{{user.nom}}"
+               (change)="onCheckboxChange(user,$event,selctedStaffTypeChanged,i)"
+        > {{user.nom}} {{user.prenom}}
+      </div>
+    </div>
+
+  </div>
+
+<!--
+  <div class="col-md-2">
+
+  <label class="label label-default" >Selected Projects</label>
+  <select class="form-control" formControlName="SelectedProjects" #projects (change)="onSelectTypeStaff(projects)" #sele>
+    <option>All Projects</option>
+    <option >Selected Projects</option>
+  </select>
+
+
+  <div *ngIf="staff.value=='Selected Staff'">
+    Please selected Staff here:
+    <div *ngFor="let project of projectsTab">
+      <input type="checkbox"
+             value="{{project.nom}}"
+             (change)="onCheckboxChange(user,$event,selctedStaffTypeChanged)"
+      > {{user.nom}} {{user.prenom}}
+    </div>
+  </div>
+
+</div>-->
+
+ <!-- <div class="col-md-2">
+  <label>Sort</label>
+  <select class="form-control" (change)="onSortSelected(sel2)" #sel2>
+    <option>Increasing Values<i class="fas fa-sort-amount-up"></i>  </option>
+    <option>Decreasing  Values<i class="fas fa-sort-amount-up"></i></option>
+
+  </select>
+    </div>-->
+
+</div>
+</form>

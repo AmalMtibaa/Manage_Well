@@ -1,0 +1,19 @@
+
+<nav>
+  <div class="nav nav-tabs card-header" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="html" data-toggle="tab" href="#nav-html" role="tab"  aria-selected="true">Generate HTML Report</a>
+    <a class="nav-item nav-link" id="cvf" data-toggle="tab" href="#nav-cvf" role="tab" aria-selected="false">Export Report to CSV file</a>
+  </div>
+</nav>
+<div class="card text-white">
+
+  <div class="card-header bg-primary">Report Preview</div>
+  <div class="card-body" style="color: black;">
+
+  <app-time-balance-form  *ngIf="idTypeReport==0" [db1]="dataGrouping1" [db2]="dataGrouping2"></app-time-balance-form>
+  <app-leave-time-balance *ngIf="idTypeReport==1" [db1]="dataGrouping1" [db2]="dataGrouping2"></app-leave-time-balance>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,236 @@
+<section class="container-fluid">
+  <div class="row">
+        <div class=" nav-item dropdown btn btn-info" >
+          <a class="nav-link dropdown-toggle" style="color: white;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add New &nbsp;&nbsp; <i class="fas fa-plus"></i></a>
+          <div class="dropdown-menu">
+
+            <button type="button" class=" dropdown-item btn" data-toggle="modal" data-target="#modal" (click)="onSelectedAdd('add_client')">Add Client &nbsp;&nbsp; <i class="fas fa-plus"></i></button>
+            <button class="dropdown-item" data-toggle="modal" data-target="#modal" (click)="onSelectedAdd('add_project')">Add Project&nbsp;&nbsp; <i class="fas fa-plus"></i></button>
+
+          </div>
+        </div>
+  </div>
+  <br>
+  <div class="row border border-ligh">
+    <div class="card bg-light">
+      <div class="card-header">
+        Customers & Projects
+      </div>
+
+        <div *ngFor="let client of clientList">
+            <a  class="list-group-item list-group-item-action" (click)="showProject(client, client.projectsID, client._id,client.name)">{{ client.name }} &nbsp;&nbsp; </a>
+          <a (click)="onConfiguartionClicked(client.name)"><i class="fas fa-cog"></i></a>
+            <a (click)="deleteClient(client._id,client.projectsID)"><i class="far fa-trash-alt" ></i></a>
+            <div *ngIf="client.aff" class="{{client._id}}">
+             <ul *ngFor="let project of client.result">
+               <li><a (click)="onSelectProject(project)">
+                 {{project.name}}
+                 <!--<button type="button" (click)="onDeleteProject(project._id,project.client)">-->
+                  <!--X-->
+                 <!--</button>-->
+               </a></li>
+             </ul>
+            </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+   <!-- <div   style=" z-index: 3; width: 400px;height: 300px;">
+      <router-outlet class="bg-light"></router-outlet>
+    </div >-->
+    <div class="col">
+     <div style="font-size: larger">
+      Tasks of
+      <input type="text" class="form-control col-md-3" placeholder="search Task" style="float: right;">
+      <br> Tasks of {{selectedClientName}}
+     </div>
+
+      <div *ngIf="!isSuppr">
+        <table class="table ">
+          <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Deadline</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of selectedClientFullTasks">
+            <td> {{ task.name }} </td>
+            <td *ngIf="task.status"> Open </td>
+            <td *ngIf="!task.status"> Close </td>
+            <td> {{ task.duration }} </td>
+            <td> {{ task.deadline |date: 'dd/MM/yyyy'}} </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+
+      <div class="bg-white border border-primary text-success text-center" style="font-weight: bold; " *ngIf="isSuppr">
+        <div class="d-flex justify-content-center">
+          <!-- nom projet -->
+          <div class="col">
+            Nom :
+          </div>
+          <!-- durée projet -->
+          <div class="col">
+            Durée :
+          </div>
+          <!-- client projet -->
+          <div class="col">
+            Client :
+          </div>
+          <!-- status projet -->
+          <div class="col">
+            Statut :
+          </div>
+          <!-- deadline projet -->
+          <div class="col">
+            Deadline :
+          </div>
+        </div>
+      </div>
+      <div class="bg-white border border-primary text-success text-center" style="font-weight: bold; " *ngIf="isSuppr">
+        <div class="d-flex justify-content-center">
+          <!-- Project Name -->
+          <div class="col">
+            {{ projetAffich.name }}
+          </div>
+
+          <div class="col">
+            {{ +projetAffich.duration }}
+          </div>
+
+          <div class="col">
+            {{ projetAffich.client }}
+          </div>
+
+          <!-- Project Status -->
+          <div class="col" *ngIf="projetAffich.status">
+            {{'Open'}}
+          </div>
+          <div class="col" *ngIf="!projetAffich.status">
+            Close
+          </div>
+          <!-- deadline projet -->
+          <div class="col">
+            {{ projetAffich.deadline |date: 'dd/MM/yyyy' }}
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="text-white bg-info" *ngIf="isSuppr">
+        <br>
+        <div class="d-flex justify-content-center">
+          <div class="col">
+            Add Task to this Project: &times; <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal" (click)="onSelectedAdd('Add_Task')">Add TAsk</button>
+          </div>
+          <div class="col">
+            Update Project: &times; <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal" (click)="onSelectedAdd('update_project')">Update Button</button>
+          </div>
+        </div>
+        <br>
+      </div>
+      <div class="" *ngIf="isSuppr">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let task of tasksList">
+            <td> {{ task.name }} </td>
+            <td *ngIf="task.status"> Open </td>
+            <td *ngIf="!task.status"> Close </td>
+            <td> {{ task.duration }} </td>
+            <td> {{ task.deadline |date: 'dd/MM/yyyy'}} </td>
+            <td>
+
+              <img  (click)="onUpdateTask(task)"
+                    data-toggle="modal" data-target="#modal"
+                    style="cursor:pointer;" class="mb-4" src="http://www.webdesign-tutoriaux.com/images/resultat-bouton-glassy-gimp.png"
+                    alt="update" width="40" height="40"> </td>
+
+            <td> <img (click)="onPreSupprTache(task)"
+                      data-toggle="modal"
+                      data-target="#suppr_tache"
+                      style="cursor:pointer;" class="mb-4" src="https://png.icons8.com/small/1600/filled-trash.png"
+                      alt="delete" width="40"
+                      height="40"> </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete task -->
+  <div class="modal fade" id="suppr_tache" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- formulaire -->
+            Do you really want to delete this Task <code class='highlighter-rouge'>{{selectedTaskToDelete.name}}</code> <br/>The deletion is irriversible.
+          <!-- formulaire -->
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onDeleteTask()">Delete</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- supprimer un projet -->
+  <div class="modal fade" id="suppr_projet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Supprimer un projet</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- formulaire -->
+          Etes-vous sure de vouloir supprimer <code class='highlighter-rouge display-6'>{{ProjetSupprime}}</code> de la liste des projets ?<br/>La suppression est irriversible.
+          <!-- formulaire -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onSupprProjet()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- -------------------To Optimize the Modal Code ----------------------------- !-->
+
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <app-client *ngIf="whatToShowInModal==1"></app-client>
+        <app-project-create-update *ngIf="whatToShowInModal==2" [action]="'create'"></app-project-create-update>
+        <app-project-create-update *ngIf="whatToShowInModal==3"  [action]="'update'" [projectToUpdate]="projetAffich"></app-project-create-update>
+        <app-task-create [selectedProject]="projetAffich" *ngIf="whatToShowInModal==4"></app-task-create>
+        <app-task-update [selectedProject]="projetAffich" [selectedTask]="selectedTaskToUpdate"  *ngIf="whatToShowInModal==5"></app-task-update>
+      </div>
+    </div>
+  </div>
+</section>

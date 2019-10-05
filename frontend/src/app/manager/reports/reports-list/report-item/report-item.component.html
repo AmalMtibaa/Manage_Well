@@ -1,0 +1,34 @@
+
+<div class="card " style="max-width :25rem;">
+<label class="badge badge-info report" [ngStyle]="
+{'background-color': selectedReport.format=='pdf'?  '#e60000' :selectedReport.format=='excel'?  '#009900' :'#3a87ad'}"> {{selectedReport.format}} </label>
+
+  <div class="card-header"><b>Type :</b>{{selectedReport.type}}
+    <a (click)="onDelete(selectedReportId)">
+    <i class="fas fa-times"
+    style="float: right; cursor: pointer">
+    </i>
+    </a>
+  </div>
+
+  <div class="card-body text-primary">
+    <h5 class="card-title"><a href="#">{{selectedReport.name}}</a></h5>
+    <div class="card-text">
+
+      <i class="far fa-calendar-alt"></i> {{selectedReport.dateRange}}
+        <div *ngIf="selectedReport.selectedStaff=='All Staff';else elseContent">
+      <i class="fas fa-users"></i>&nbsp;{{selectedReport.selectedStaff}}
+        </div>
+
+      <ng-template #elseContent >
+        <br>
+        <i class="fas fa-users"></i>
+        <div *ngFor="let user of selectedReport.selectedStaffList" style="display: inline">
+        {{user}} ,
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+

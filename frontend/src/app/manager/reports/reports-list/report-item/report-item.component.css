@@ -1,0 +1,16 @@
+label {
+  font-weight: bold;
+  display: block;
+  width: 50px;
+  float: left;
+  color: white;
+
+}
+  .report{
+  position:absolute;
+  left: -25px;
+  top: -10px;
+    height: 25px;
+    font-size: medium;
+}
+label:after { content: "" }

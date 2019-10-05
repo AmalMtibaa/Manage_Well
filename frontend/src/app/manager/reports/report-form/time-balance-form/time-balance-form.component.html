@@ -1,0 +1,65 @@
+<div *ngIf="db2=='Do not use 2nd grouping level';else: content">
+<table class="table table-bordered" >
+
+  <tr class="table-primary">
+    <td  rowspan="2" >{{db1}}</td>
+    <td  colspan="3">Time Balance</td>
+
+  </tr>
+  <tr class="table-primary">
+    <td>Scheduled</td>
+    <td>Reported</td>
+    <td>Difference</td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Total:</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+    <td>hh:mm</td>
+  </tr>
+
+    <tr *ngFor="let i of Arr(num).fill(1)" style="background-color: #f2f2f2">
+      <td>{{db1 | LastCharacterCut}}</td>
+      <td>hh:mm</td>
+      <td>hh:mm</td>
+      <td>hh:mm</td>
+    </tr>
+
+</table>
+</div>
+    <ng-template  #content>
+      <table class="table table-bordered" >
+      <tr class="table-primary">
+        <td  rowspan="2" >{{db1}}/{{db2}}</td>
+        <td  colspan="3">Time Balance</td>
+      </tr>
+        <tr class="table-primary">
+          <td>Scheduled</td>
+          <td>Reported</td>
+          <td>Difference</td>
+        </tr>
+        <tr>
+          <td style="text-align: right">Total:</td>
+          <td>hh:mm</td>
+          <td>hh:mm</td>
+          <td>hh:mm</td>
+        </tr>
+
+      <tr  style="background-color: #f2f2f2">
+        <td>{{db1 | LastCharacterCut}}</td>
+        <td>hh:mm</td>
+        <td>hh:mm</td>
+        <td>hh:mm</td>
+      </tr>
+
+      <tr *ngFor="let i of Arr(num).fill(1)">
+        <td>{{db2 | LastCharacterCut}}</td>
+        <td>hh:mm</td>
+        <td>hh:mm</td>
+        <td>hh:mm</td>
+      </tr>
+
+      </table>
+    </ng-template>
+
+

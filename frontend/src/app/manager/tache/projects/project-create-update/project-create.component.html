@@ -1,0 +1,78 @@
+<div class="modal-header">
+
+    <h5 *ngIf="action=='create'" class="modal-title" >Add Project</h5>
+    <h5 *ngIf="action=='update'" class="modal-title" >Update {{projectToUpdate.name}}</h5>
+
+    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+</div>
+
+<form  #formProject="ngForm" >
+    <div class="modal-body">
+              <label class="col-2 col-form-label" >Name</label>
+              <div class="col-10">
+                <input class="form-control"
+                       type="text" placeholder="Name"
+                       id="nameProject"
+                       [ngModel]="action==='update' ? projectToUpdate.name : ''" name="name"
+                       autocomplete="off"
+                >
+              </div>
+
+
+                <label  class="col-2 col-form-label" [hidden]="action==='update'">Client</label>
+                <div class="col-10">
+                  <select class="form-control" #sel [hidden]="action==='update'" >
+                    <option
+                      *ngFor="let client of clientsList" [ngValue]="data">{{client.name}}
+                    </option>
+                  </select>
+                </div>
+
+                <label  class="col-2 col-form-label">Status</label>
+                <div class="col-10">
+                  <select class="form-control"
+                          [ngModel]="action==='update' ? projectToUpdate.status : 'Open' "
+                          name="status">
+                    <option>Open</option>
+                    <option>Close</option>
+                  </select>
+                </div>
+
+
+              <label class="col-2 col-form-label">Duration</label>
+              <div class="col-10">
+                <input class="form-control"
+                       type="number"
+                       placeholder="Durée (en jour)"
+                       [ngModel]="action==='update' ? projectToUpdate.duration : ''" name="duration"
+                       autocomplete="off">
+              </div>
+
+
+                <label  class="col-3 col-form-label">start Day</label>
+                <div class="col-10">
+                  <input class="form-control"
+                         type="date"
+                         name="startDay"
+                         [ngModel]="action==='update' ? (projectToUpdate.startDay|date:'yyyy-MM-dd') : (todayDate|date:'yyyy-MM-dd')"
+                  >
+                </div>
+
+
+              <label  class="col-2 col-form-label">Deadline</label>
+              <div class="col-10" >
+                <input class="form-control"
+                       type="date"
+                       [ngModel]="action==='update' ? (projectToUpdate.deadline|date:'yyyy-MM-dd') : (todayDate|date:'yyyy-MM-dd')"
+                       name="deadline">
+              </div>
+
+</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success" data-dismiss="modal" (click)="onSubmit(sel)">Save</button>
+          </div>
+</form>

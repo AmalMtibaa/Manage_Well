@@ -1,0 +1,27 @@
+<div style="float: right ; color:cornflowerblue;"  >
+  <nav >
+    <div class="nav nav-tabs" id="nav-tab" role="tablist" >
+      <a class="nav-item nav-link" [ngClass]="{active : barChartType=='bar'}" (click)="onSelectChange('bar')"><i class="fas fa-signal"></i> </a>
+      <a class="nav-item nav-link" [ngClass]="{active : barChartType=='pie'}"(click)="onSelectChange('pie')"><i class="fas fa-chart-pie"></i></a>
+      <a class="nav-item nav-link" [ngClass]="{active : barChartType=='doughnut'}" (click)="onSelectChange('doughnut')"><i class="fas fa-circle-notch"></i></a>
+    </div>
+  </nav>
+</div>
+
+
+<div style="display: block" id="chartContent">
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
+<div class="row" ><br><br></div>
+
+
+<button class="btn btn-danger" style="float: right" (click)="genPDFi()">Export Pdf</button>
+
+
