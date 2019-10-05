@@ -15,4 +15,4 @@ MEAN Stack :
     
 # Report : 
 
-I provide my internship report in manage_well_report
+I provide my internship report in manage_well_report.pdf
